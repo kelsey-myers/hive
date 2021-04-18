@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/buzzes";
+const url = "https://hive-km2021.herokuapp.com/buzzes";
 
 export const fetchBuzzes = () => axios.get(url);
 export const createBuzz = (newBuzz) => axios.post(url, newBuzz);
