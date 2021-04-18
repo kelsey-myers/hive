@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./Styles";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { createBuzz } from "../../actions/buzzes";
+import { createBuzz, updateBuzz } from "../../actions/buzzes";
+import { useSelector } from "react-redux";
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
-  const [postData, setPostData] = useState({
+  const [buzzData, setBuzzData] = useState({
     creator: "",
     title: "",
     message: "",
@@ -15,14 +16,35 @@ const Form = () => {
     selectedFile: "",
   });
   const dispatch = useDispatch();
+  const buzz = useSelector((state) =>
+    currentId ? state.buzzes.find((p) => p._id == currentId) : null
+  );
+
+  useEffect(() => {
+    if (buzz) setBuzzData(buzz);
+  }, [buzz]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(createBuzz(postData));
+    if (currentId) {
+      dispatch(updateBuzz(currentId, buzzData));
+    } else {
+      dispatch(createBuzz(buzzData));
+    }
+    clear();
   };
 
-  const clear = () => {};
+  const clear = () => {
+    setCurrentId(null);
+    setBuzzData({
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+    });
+  };
 
   return (
     <Paper className={classes.paper}>
@@ -32,15 +54,17 @@ const Form = () => {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">Creating a Buzz</Typography>
+        <Typography variant="h6">
+          {currentId ? "Editing" : "Creating"} a Buzz
+        </Typography>
         <TextField
           name="creator"
           variant="outlined"
           label="Creator"
           fullWidth
-          value={postData.creator}
+          value={buzzData.creator}
           onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
+            setBuzzData({ ...buzzData, creator: e.target.value })
           }
         />
         <TextField
@@ -48,17 +72,17 @@ const Form = () => {
           variant="outlined"
           label="Title"
           fullWidth
-          value={postData.title}
-          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+          value={buzzData.title}
+          onChange={(e) => setBuzzData({ ...buzzData, title: e.target.value })}
         />
         <TextField
           name="message"
           variant="outlined"
           label="Message"
           fullWidth
-          value={postData.message}
+          value={buzzData.message}
           onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
+            setBuzzData({ ...buzzData, message: e.target.value })
           }
         />
         <TextField
@@ -66,15 +90,15 @@ const Form = () => {
           variant="outlined"
           label="Tags"
           fullWidth
-          value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          value={buzzData.tags}
+          onChange={(e) => setBuzzData({ ...buzzData, tags: e.target.value })}
         />
         <div className={classes.fileInput}>
           <FileBase
             type="file"
             multiple={false}
             onDone={({ base64 }) =>
-              setPostData({ ...postData, selectedFile: base64 })
+              setBuzzData({ ...buzzData, selectedFile: base64 })
             }
           ></FileBase>
         </div>
