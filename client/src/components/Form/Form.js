@@ -91,7 +91,9 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Tags"
           fullWidth
           value={buzzData.tags}
-          onChange={(e) => setBuzzData({ ...buzzData, tags: e.target.value })}
+          onChange={(e) =>
+            setBuzzData({ ...buzzData, tags: e.target.value.split(",") })
+          }
         />
         <div className={classes.fileInput}>
           <FileBase

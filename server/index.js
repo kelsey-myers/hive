@@ -22,7 +22,12 @@ app.use(
   })
 );
 app.use(cors());
+
 app.use("/buzzes", buzzRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Hello to Hive API");
+});
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,10 +1,17 @@
+import {
+  FETCH_ALL,
+  CREATE,
+  UPDATE,
+  DELETE,
+  LIKE,
+} from "../constants/actionTypes";
 import * as api from "../api";
 
 //Action creators
 export const getBuzzes = () => async (dispatch) => {
   try {
     const { data } = await api.fetchBuzzes();
-    dispatch({ type: "FETCH_ALL", payload: data });
+    dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
     console.log(error.message);
   }
@@ -13,7 +20,7 @@ export const getBuzzes = () => async (dispatch) => {
 export const createBuzz = (buzz) => async (dispatch) => {
   try {
     const { data } = await api.createBuzz(buzz);
-    dispatch({ type: "CREATE", payload: data });
+    dispatch({ type: CREATE, payload: data });
   } catch (error) {
     console.log(error.message);
   }
@@ -22,7 +29,7 @@ export const createBuzz = (buzz) => async (dispatch) => {
 export const updateBuzz = (id, buzz) => async (dispatch) => {
   try {
     const { data } = await api.updateBuzz(id, buzz);
-    dispatch({ type: "UPDATE", payload: data });
+    dispatch({ type: UPDATE, payload: data });
   } catch (error) {
     console.log(error.message);
   }
@@ -31,7 +38,7 @@ export const updateBuzz = (id, buzz) => async (dispatch) => {
 export const deleteBuzz = (id) => async (dispatch) => {
   try {
     await api.deleteBuzz(id);
-    dispatch({ type: "DELETE", payload: id });
+    dispatch({ type: DELETE, payload: id });
   } catch (error) {
     console.log(error.message);
   }
@@ -40,7 +47,7 @@ export const deleteBuzz = (id) => async (dispatch) => {
 export const likeBuzz = (id) => async (dispatch) => {
   try {
     const { data } = await api.likeBuzz(id);
-    dispatch({ type: "LIKE", payload: data });
+    dispatch({ type: LIKE, payload: data });
   } catch (error) {
     console.log(error.message);
   }

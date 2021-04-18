@@ -61,7 +61,7 @@ const Buzz = ({ buzz, setCurrentId }) => {
           onClick={() => dispatch(likeBuzz(buzz._id))}
         >
           <ThumbUpAltIcon fontSize="small" />
-          Like
+          &nbsp; Like &nbsp;
           {buzz.likeCount}
         </Button>
         <Button
