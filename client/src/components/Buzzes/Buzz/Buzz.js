@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import moment from "moment";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useStyles from "./Styles";
@@ -56,17 +56,17 @@ const Buzz = ({ buzz, setCurrentId }) => {
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button
+          className={classes.likeButton}
           size="small"
-          color="primary"
           onClick={() => dispatch(likeBuzz(buzz._id))}
         >
-          <ThumbUpAltIcon fontSize="small" />
-          &nbsp; Like &nbsp;
+          <FavoriteIcon fontSize="small" />
+          &nbsp;
           {buzz.likeCount}
         </Button>
         <Button
           size="small"
-          color="primary"
+          className={classes.deleteButton}
           onClick={() => dispatch(deleteBuzz(buzz._id))}
         >
           <DeleteIcon fontSize="small" />

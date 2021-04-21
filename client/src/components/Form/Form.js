@@ -54,13 +54,13 @@ const Form = ({ currentId, setCurrentId }) => {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">
-          {currentId ? "Editing" : "Creating"} a Buzz
+        <Typography variant="h6" className={classes.formTitle}>
+          {currentId ? "edit your" : "create a"} buzz
         </Typography>
         <TextField
           name="creator"
           variant="outlined"
-          label="Creator"
+          label="creator"
           fullWidth
           value={buzzData.creator}
           onChange={(e) =>
@@ -70,7 +70,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="title"
           variant="outlined"
-          label="Title"
+          label="title"
           fullWidth
           value={buzzData.title}
           onChange={(e) => setBuzzData({ ...buzzData, title: e.target.value })}
@@ -78,7 +78,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="message"
           variant="outlined"
-          label="Message"
+          label="message"
           fullWidth
           value={buzzData.message}
           onChange={(e) =>
@@ -88,7 +88,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="tags"
           variant="outlined"
-          label="Tags"
+          label="tags"
           fullWidth
           value={buzzData.tags}
           onChange={(e) =>
@@ -107,7 +107,6 @@ const Form = ({ currentId, setCurrentId }) => {
         <Button
           className={classes.buttonSubmit}
           variant="contained"
-          color="primary"
           size="large"
           type="submit"
           fullWidth
@@ -115,8 +114,8 @@ const Form = ({ currentId, setCurrentId }) => {
           Submit
         </Button>
         <Button
+          className={classes.buttonClear}
           variant="contained"
-          color="secondary"
           size="small"
           onClick={clear}
           fullWidth

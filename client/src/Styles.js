@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
+  main: {
+    fontFamily: "Yu Gothic",
+  },
   appBar: {
     borderRadius: 15,
     margin: "30px 0",
@@ -10,7 +13,9 @@ export default makeStyles((theme) => ({
     alignItems: "center",
   },
   heading: {
-    color: "rgba(0,183,255, 1)",
+    color: "#000",
+    fontFamily: "Yu Gothic",
+    fontWeight: "bold",
   },
   image: {
     marginLeft: "15px",

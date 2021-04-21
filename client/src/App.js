@@ -7,7 +7,7 @@ import Buzzes from "./components/Buzzes/Buzzes";
 import Form from "./components/Form/Form";
 import useStyles from "./Styles";
 
-import memories from "./images/memories.png";
+import bee from "./images/bee.png";
 
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
@@ -19,12 +19,12 @@ const App = () => {
   }, [currentId, dispatch]);
 
   return (
-    <Container maxwidth="lg">
+    <Container maxwidth="lg" className={classes.main}>
       <AppBar position="static" color="inherit" className={classes.appBar}>
         <Typography variant="h2" align="center" className={classes.heading}>
-          Hive
+          hive
         </Typography>
-        <img src={memories} alt="hive" height="60" className={classes.image} />
+        <img src={bee} alt="hive" height="60" className={classes.image} />
       </AppBar>
       <Grow in>
         <Container>
